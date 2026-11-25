@@ -21,6 +21,7 @@ Herramientas Pega Systems para procesar archivos CSV y JSON directamente en el n
 - Descarga un CSV único o un ZIP cuando se procesan varios archivos.
 - Después de limpiar todos los archivos, la acción queda deshabilitada hasta cambiar la selección o las opciones. Si algún archivo falla, se puede reintentar; volver a seleccionar archivos ya incluidos no altera el resultado.
 - Todo el procesamiento ocurre en el navegador; no se envían archivos a un servidor.
+- Se puede instalar como aplicación desde navegadores compatibles (por ejemplo, Chrome y Edge) cuando el sitio está publicado con HTTPS. Usa la opción **Instalar Pega Tools** del navegador; en iPhone/iPad, selecciona **Añadir a pantalla de inicio** en Safari.
 - Al abrir la página, se recupera la última herramienta utilizada en ese navegador; si no hay una guardada, se muestra la pantalla inicial. Volver al inicio permite elegir otra herramienta sin borrar esa preferencia.
 - El formateador JSON permite pegar desde la barra superior y quitar las propiedades `pxObjClass` de Pega, incluso en objetos y arreglos anidados.
 - En el formateador JSON, mantén pulsada la tecla `Alt` para ver las letras de los atajos disponibles y pulsa `Alt` junto con la letra correspondiente para ejecutar una acción. El botón de teclado en la barra superior muestra la lista completa, además de los atajos habituales de edición. Algunas combinaciones pueden estar reservadas por el navegador o el sistema operativo.
