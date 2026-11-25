@@ -19,6 +19,7 @@ Herramientas Pega Systems para procesar archivos CSV y JSON directamente en el n
 - Conserva el delimitador y el salto de línea detectados en el CSV original.
 - Elimina timestamps tipo `20260812T215952.873 GMT` del nombre de salida.
 - Descarga un CSV único o un ZIP cuando se procesan varios archivos.
+- Después de limpiar todos los archivos, la acción queda deshabilitada hasta cambiar la selección o las opciones. Si algún archivo falla, se puede reintentar; volver a seleccionar archivos ya incluidos no altera el resultado.
 - Todo el procesamiento ocurre en el navegador; no se envían archivos a un servidor.
 - Al abrir la página, se recupera la última herramienta utilizada en ese navegador; si no hay una guardada, se muestra la pantalla inicial. Volver al inicio permite elegir otra herramienta sin borrar esa preferencia.
 - El formateador JSON permite pegar desde la barra superior y quitar las propiedades `pxObjClass` de Pega, incluso en objetos y arreglos anidados.

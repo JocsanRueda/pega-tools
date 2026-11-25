@@ -50,6 +50,8 @@ export function useCsvCleaner() {
   const [duplicateColumns, setDuplicateColumns] = useState<number[]>([]);
   const [headerResult, setHeaderResult] = useState<{ file: File; headers: string[]; error: string | null } | null>(null);
   const singleFile = files.length === 1 ? files[0] : null;
+  const isClean = result !== null && summary !== null && summary.errors.length === 0;
+  const canClean = files.length > 0 && !isProcessing && !isClean;
 
   useEffect(() => {
     if (!singleFile) return;
@@ -70,15 +72,19 @@ export function useCsvCleaner() {
   }, []);
 
   const addFiles = useCallback((incoming: File[]) => {
-    setFiles((current) => mergeUniqueCsv(current, incoming));
+    const merged = mergeUniqueCsv(files, incoming);
+    if (merged.length === files.length) return;
+    setFiles(merged);
+    setProgress({});
     setDuplicateRowsEnabled(false);
     setDuplicateColumns([]);
     setSummary(null);
     setResult(null);
-  }, []);
+  }, [files]);
 
   const removeFile = useCallback((index: number) => {
     setFiles((current) => current.filter((_, i) => i !== index));
+    setProgress({});
     setDuplicateRowsEnabled(false);
     setDuplicateColumns([]);
     setSummary(null);
@@ -97,6 +103,7 @@ export function useCsvCleaner() {
 
   const toggleOptionalColumn = useCallback((name: string) => {
     setOptionalColumns((current) => ({ ...current, [name]: !current[name] }));
+    setProgress({});
     setResult(null);
     setSummary(null);
   }, []);
@@ -105,17 +112,20 @@ export function useCsvCleaner() {
     setDuplicateColumns((current) =>
       current.includes(index) ? current.filter((column) => column !== index) : [...current, index],
     );
+    setProgress({});
     setResult(null);
     setSummary(null);
   }, []);
 
   const toggleDuplicateRows = useCallback(() => {
     setDuplicateRowsEnabled((current) => !current);
+    setProgress({});
     setResult(null);
     setSummary(null);
   }, []);
 
   const clean = useCallback(async () => {
+    if (!canClean) return;
     setIsProcessing(true);
     setResult(null);
     setProgress({});
@@ -168,7 +178,7 @@ export function useCsvCleaner() {
     } finally {
       setIsProcessing(false);
     }
-  }, [files, optionalColumns, duplicateRowsEnabled, duplicateColumns, setFileProgress]);
+  }, [canClean, files, optionalColumns, duplicateRowsEnabled, duplicateColumns, setFileProgress]);
 
   const download = useCallback(async () => {
     if (!result) return;
@@ -185,6 +195,8 @@ export function useCsvCleaner() {
     result,
     summary,
     isProcessing,
+    canClean,
+    isClean,
     optionalColumns,
     duplicateRowsEnabled,
     duplicateColumns,

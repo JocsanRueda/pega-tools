@@ -12,6 +12,7 @@ export interface Texts {
   columnsToRemoveLabel: string;
   pyGuidDescription: string;
   cleanButton: string;
+  alreadyClean: string;
   clearButton: string;
   downloadButton: string;
   filesEyebrow: string;
@@ -57,6 +58,7 @@ export const TEXTS: Texts = Object.freeze({
   columnsToRemoveLabel: 'Columnas adicionales a eliminar',
   pyGuidDescription: 'Activado por defecto y sin sensibilidad a mayúsculas.',
   cleanButton: 'Limpiar archivos',
+  alreadyClean: 'Los archivos ya se limpiaron con las opciones actuales.',
   clearButton: 'Limpiar lista',
   downloadButton: 'Descargar resultado',
   filesEyebrow: 'Archivos',
