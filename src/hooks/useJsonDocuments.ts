@@ -9,6 +9,10 @@ export interface JsonDocument {
   pinned?: boolean;
 }
 
+export function getDocumentDisplayName(name: string): string {
+  return name.replace(/\.json$/i, '');
+}
+
 interface StoredWorkspace {
   documents: JsonDocument[];
   activeDocumentId: string;
@@ -106,10 +110,10 @@ export function useJsonDocuments() {
 
   const createNewDocument = useCallback(() => {
     let number = 1;
-    let name = 'nuevo.json';
+    let name = 'file.json';
     while (documents.some((document) => document.name === name)) {
       number += 1;
-      name = `nuevo (${number}).json`;
+      name = `file (${number}).json`;
     }
 
     const document = createDocument(name);
@@ -144,7 +148,7 @@ export function useJsonDocuments() {
     setWorkspace((previous) => ({
       ...previous,
       documents: previous.documents.map((document) => document.id === id
-        ? { ...document, name: trimmedName }
+        ? { ...document, name: `${trimmedName}.json` }
         : document),
     }));
   }, []);
