@@ -1,4 +1,4 @@
-import { FileText, Home, Moon, Sun } from 'lucide-react';
+import { FileSpreadsheet, Home, Moon, Sun } from 'lucide-react';
 import { TEXTS } from '../config';
 
 interface HeaderProps {
@@ -11,7 +11,7 @@ export function Header({ theme, onToggleTheme, onBack }: HeaderProps) {
   return (
     <header className="relative z-10 flex shrink-0 items-center border-b border-zinc-200 bg-white px-4 py-2 dark:border-zinc-800 dark:bg-[#1e1e1e]">
       <div className="mr-auto flex min-w-0 items-center gap-1.5">
-        <FileText size={14} className="shrink-0 text-zinc-500" aria-hidden="true" />
+        <FileSpreadsheet size={14} className="shrink-0 text-zinc-500" aria-hidden="true" />
         <h1 className="truncate text-xs font-medium uppercase tracking-wide text-zinc-500">
           {TEXTS.appTitle}
         </h1>
