@@ -110,7 +110,7 @@ export function ModeSelectionScreen({ onSelectMode }: ModeSelectionScreenProps) 
                   Limpiador JSON
                 </h2>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  LLimpia, Formatea, valida y transforma archivos JSON de forma sencilla
+                  Limpia, Formatea, valida y transforma archivos JSON de forma sencilla
                 </p>
               </div>
               <ArchitectureBadges items={['Constellation']} />
