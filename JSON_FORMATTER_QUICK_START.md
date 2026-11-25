@@ -19,6 +19,7 @@ Una herramienta integrada en Pega Tools para formatear, validar y transformar ar
 - **Indentación**: Ajusta de 1 a 8 espacios
 - **Copiar**: Copia resultados al portapapeles
 - **Descargar**: Descarga el resultado como archivo `.json`
+- Al renombrar un documento, escribe solo el nombre visible. La extensión `.json` se agrega automáticamente al descargarlo; por ejemplo, `hola.mp4` se descarga como `hola.mp4.json`.
 
 ## Cómo Usar
 

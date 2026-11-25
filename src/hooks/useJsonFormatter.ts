@@ -127,7 +127,7 @@ export const useJsonFormatter = (initialInput = '') => {
   const downloadJson = useCallback((content: string, filename: string = 'formatted.json') => {
     const element = document.createElement('a');
     element.setAttribute('href', `data:application/json;charset=utf-8,${encodeURIComponent(content)}`);
-    element.setAttribute('download', filename);
+    element.setAttribute('download', /\.json$/i.test(filename) ? filename : `${filename}.json`);
     element.style.display = 'none';
     document.body.appendChild(element);
     element.click();

@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, FilePlus2, Pin, Trash2 } from 'lucide-react';
 import { JSON_SHORTCUTS } from '../config';
-import type { JsonDocument } from '../hooks/useJsonDocuments';
+import { getDocumentDisplayName, type JsonDocument } from '../hooks/useJsonDocuments';
 import { ShortcutHint } from './ShortcutHint';
 
 interface JsonDocumentsSidebarProps {
@@ -40,14 +40,14 @@ export const JsonDocumentsSidebar = forwardRef<JsonDocumentsSidebarHandle, JsonD
     renameActive: () => {
       const document = documents.find((item) => item.id === activeDocumentId);
       if (document && !isCollapsed) {
-        setRenameDraft(document.name);
+        setRenameDraft(getDocumentDisplayName(document.name));
         setEditingDocumentId(document.id);
       }
     },
   }), [activeDocumentId, documents, isCollapsed]);
 
   const startRename = (document: JsonDocument) => {
-    setRenameDraft(document.name);
+    setRenameDraft(getDocumentDisplayName(document.name));
     setEditingDocumentId(document.id);
   };
 
@@ -63,7 +63,7 @@ export const JsonDocumentsSidebar = forwardRef<JsonDocumentsSidebarHandle, JsonD
         {!isCollapsed && (
           <>
             <h2 className="text-[11px] font-semibold uppercase tracking-wider text-zinc-600 dark:text-[#a9b1d6]">
-              Documentos
+              Archivos
             </h2>
             <button
               type="button"
@@ -98,6 +98,7 @@ export const JsonDocumentsSidebar = forwardRef<JsonDocumentsSidebarHandle, JsonD
             {[...documents].sort((a, b) => Number(!!b.pinned) - Number(!!a.pinned)).map((document) => {
               const isActive = document.id === activeDocumentId;
               const isEditing = document.id === editingDocumentId;
+              const displayName = getDocumentDisplayName(document.name);
 
               return (
                 <li
@@ -133,7 +134,7 @@ export const JsonDocumentsSidebar = forwardRef<JsonDocumentsSidebarHandle, JsonD
                       title="Haz doble clic para cambiar el nombre"
                       data-json-shortcut={isActive ? JSON_SHORTCUTS.renameDocument.key : undefined}
                     >
-                      <span className="truncate">{document.name.replace(/\.json$/i, '')}</span>
+                      <span className="truncate">{displayName}</span>
                       <ShortcutHint shortcut={JSON_SHORTCUTS.renameDocument.key} visible={showShortcutHints && isActive} />
                     </button>
                   )}
@@ -143,8 +144,8 @@ export const JsonDocumentsSidebar = forwardRef<JsonDocumentsSidebarHandle, JsonD
                     className={`relative shrink-0 rounded p-1 transition-opacity hover:bg-zinc-200 focus:opacity-100 group-hover:opacity-100 dark:hover:bg-[#414868] ${
                       document.pinned ? 'text-blue-600 dark:text-blue-400' : `text-zinc-400 [@media(hover:none)]:opacity-100 ${showShortcutHints && isActive ? 'opacity-100' : 'opacity-0'}`
                     }`}
-                    title={`${document.pinned ? 'Desfijar' : 'Fijar'} ${document.name}`}
-                    aria-label={`${document.pinned ? 'Desfijar' : 'Fijar'} ${document.name}`}
+                    title={`${document.pinned ? 'Desfijar' : 'Fijar'} ${displayName}`}
+                    aria-label={`${document.pinned ? 'Desfijar' : 'Fijar'} ${displayName}`}
                     aria-pressed={!!document.pinned}
                     data-json-shortcut={isActive && !isEditing ? JSON_SHORTCUTS.pinDocument.key : undefined}
                   >
@@ -158,8 +159,8 @@ export const JsonDocumentsSidebar = forwardRef<JsonDocumentsSidebarHandle, JsonD
                       onDelete(document.id);
                     }}
                     className={`relative mr-1 rounded p-1 text-zinc-400 transition-opacity hover:bg-red-100 hover:text-red-600 focus:opacity-100 group-hover:opacity-100 dark:hover:bg-red-950 dark:hover:text-red-400 ${showShortcutHints && isActive && !isEditing ? 'opacity-100' : 'opacity-0'}`}
-                    title={`Eliminar ${document.name}`}
-                    aria-label={`Eliminar ${document.name}`}
+                    title={`Eliminar ${displayName}`}
+                    aria-label={`Eliminar ${displayName}`}
                     data-json-shortcut={isActive && !isEditing ? JSON_SHORTCUTS.deleteDocument.key : undefined}
                   >
                     <Trash2 size={14} />
