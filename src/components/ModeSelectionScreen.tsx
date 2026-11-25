@@ -2,6 +2,29 @@ interface ModeSelectionScreenProps {
   onSelectMode: (mode: 'csv' | 'json') => void;
 }
 
+type Architecture = 'CLM' | 'Constellation';
+
+const BADGE_STYLES: Record<Architecture, string> = {
+  CLM: 'border-zinc-300 bg-zinc-100 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-300',
+  Constellation:
+    'border-blue-200 bg-blue-50 text-blue-700 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-300',
+};
+
+function ArchitectureBadges({ items }: { items: Architecture[] }) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {items.map((item) => (
+        <span
+          key={item}
+          className={`rounded-full border px-2 py-0.5 text-[11px] font-medium leading-none ${BADGE_STYLES[item]}`}
+        >
+          {item}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function ModeSelectionScreen({ onSelectMode }: ModeSelectionScreenProps) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 p-4 dark:bg-zinc-950">
@@ -51,6 +74,7 @@ export function ModeSelectionScreen({ onSelectMode }: ModeSelectionScreenProps) 
                   Limpia y procesa archivos CSV, elimina columnas y detecta duplicados
                 </p>
               </div>
+              <ArchitectureBadges items={['CLM', 'Constellation']} />
               <div className="pt-4">
                 <span className="inline-flex items-center gap-2 text-sm font-medium text-sky-600 group-hover:text-sky-700 dark:text-sky-400 dark:group-hover:text-sky-300">
                   Comenzar
@@ -83,12 +107,13 @@ export function ModeSelectionScreen({ onSelectMode }: ModeSelectionScreenProps) 
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                  Formateador JSON
+                  Limpiador JSON
                 </h2>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                  Formatea, valida y transforma archivos JSON de forma sencilla
+                  LLimpia, Formatea, valida y transforma archivos JSON de forma sencilla
                 </p>
               </div>
+              <ArchitectureBadges items={['Constellation']} />
               <div className="pt-4">
                 <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-600 group-hover:text-emerald-700 dark:text-emerald-400 dark:group-hover:text-emerald-300">
                   Comenzar
