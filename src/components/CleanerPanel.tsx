@@ -11,6 +11,8 @@ interface CleanerPanelProps {
   optionalColumns: OptionalColumns;
   hasFiles: boolean;
   isProcessing: boolean;
+  canClean: boolean;
+  isClean: boolean;
   hasResult: boolean;
   showDuplicateOptions: boolean;
   duplicateRowsEnabled: boolean;
@@ -31,6 +33,8 @@ export function CleanerPanel({
   optionalColumns,
   hasFiles,
   isProcessing,
+  canClean,
+  isClean,
   hasResult,
   showDuplicateOptions,
   duplicateRowsEnabled,
@@ -68,6 +72,8 @@ export function CleanerPanel({
         <ActionButtons
           hasFiles={hasFiles}
           isProcessing={isProcessing}
+          canClean={canClean}
+          isClean={isClean}
           hasResult={hasResult}
           onClean={onClean}
           onClear={onClear}

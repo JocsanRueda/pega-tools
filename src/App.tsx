@@ -47,6 +47,8 @@ function App() {
     result,
     summary,
     isProcessing,
+    canClean,
+    isClean,
     optionalColumns,
     duplicateRowsEnabled,
     duplicateColumns,
@@ -108,6 +110,8 @@ function App() {
                   optionalColumns={optionalColumns}
                   hasFiles={files.length > 0}
                   isProcessing={isProcessing}
+                  canClean={canClean}
+                  isClean={isClean}
                   hasResult={result !== null}
                   showDuplicateOptions={files.length === 1}
                   duplicateRowsEnabled={duplicateRowsEnabled}

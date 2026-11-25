@@ -4,19 +4,22 @@ import { Download, Sparkles, Trash2 } from 'lucide-react';
 interface ActionButtonsProps {
   hasFiles: boolean;
   isProcessing: boolean;
+  canClean: boolean;
+  isClean: boolean;
   hasResult: boolean;
   onClean: () => void;
   onClear: () => void;
   onDownload: () => void;
 }
 
-export function ActionButtons({ hasFiles, isProcessing, hasResult, onClean, onClear, onDownload }: ActionButtonsProps) {
+export function ActionButtons({ hasFiles, isProcessing, canClean, isClean, hasResult, onClean, onClear, onDownload }: ActionButtonsProps) {
   return (
     <>
       <div className="mt-6 flex flex-col gap-2 sm:flex-row">
         <button
           type="button"
-          disabled={!hasFiles || isProcessing}
+          disabled={!canClean}
+          title={isClean ? TEXTS.alreadyClean : undefined}
           onClick={onClean}
           className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-sm bg-sky-700 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-sky-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 disabled:cursor-not-allowed disabled:bg-zinc-100 disabled:text-zinc-400 dark:bg-sky-700 dark:hover:bg-sky-600 dark:disabled:bg-zinc-800 dark:disabled:text-zinc-500"
         >
